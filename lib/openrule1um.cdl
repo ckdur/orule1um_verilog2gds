@@ -1,0 +1,441 @@
+** Created by: circuit_gen.AN2D1
+** Cell name: AN2D1
+** Lib name: openrule1um
+.SUBCKT AN2D1 a1 a2 vdd vss z
+*.PININFO a1:I a2:I z:O vdd:B vss:B 
+M_u2_M_u3 net6 a1 x_u2_net6 vss NMOS l=1.000e-06 w=5.500e-06
+M_u3_M_u2 z net6 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u2_M_u4 x_u2_net6 a2 vss vss NMOS l=1.000e-06 w=5.500e-06
+M_u3_M_u3 z net6 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u2_M_u2 net6 a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u2_M_u1 net6 a1 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.AO21D1
+** Cell name: AO21D1
+** Lib name: openrule1um
+.SUBCKT AO21D1 a1 a2 b vdd vss z
+*.PININFO a1:I a2:I b:I z:O vdd:B vss:B 
+MI7 net32 a2 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u7 net59 a1 net32 vss NMOS l=1.000e-06 w=6.000e-06
+MI6 net59 b vss vss NMOS l=1.000e-06 w=6.000e-06
+MI8_M_u2 z net59 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u3 net22 a1 net59 vdd PMOS l=1.000e-06 w=1.000e-05
+MI8_M_u3 z net59 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u4 net22 a2 net59 vdd PMOS l=1.000e-06 w=1.000e-05
+M_u2 net22 b vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.AOI21D1
+** Cell name: AOI21D1
+** Lib name: openrule1um
+.SUBCKT AOI21D1 a1 a2 b vdd vss zn
+*.PININFO a1:I a2:I b:I zn:O vdd:B vss:B 
+MI2 zn a1 net27 vss NMOS l=1.000e-06 w=6.000e-06
+MI3 net27 a2 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u7 zn b vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u4 net13 a2 zn vdd PMOS l=1.000e-06 w=1.000e-05
+M_u2 net13 b vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u3 net13 a1 zn vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.BUFFD1
+** Cell name: BUFFD1
+** Lib name: openrule1um
+.SUBCKT BUFFD1 i vdd vss z
+*.PININFO i:I z:O vdd:B vss:B 
+M_u3_M_u2 z net8 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u2_M_u2 net8 i vss vss NMOS l=1.000e-06 w=3.000e-06
+M_u3_M_u3 z net8 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u2_M_u3 net8 i vdd vdd PMOS l=1.000e-06 w=5.000e-06
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.DFCNQD1
+** Cell name: DFCNQD1
+** Lib name: openrule1um
+.SUBCKT DFCNQD1 cdn cp d q vdd vss
+*.PININFO cdn:I cp:I d:I q:O vdd:B vss:B 
+Mcpbn incpb cp vss vss NMOS l=1.000e-06 w=3.000e-06 $pos=0 $flip=0
+Mcpbp incpb cp vdd vdd PMOS l=1.000e-06 w=5.000e-06 $pos=0 $flip=0
+Mcpn incp incpb vss vss NMOS l=1.000e-06 w=3.000e-06 $pos=1 $flip=1
+Mcpp incp incpb vdd vdd PMOS l=1.000e-06 w=5.000e-06 $pos=1 $flip=1
+MI4 net52 incpb vss vss NMOS l=1.000e-06 w=3.000e-06 $pos=3 $flip=1
+MI7 net85 incp vdd vdd PMOS l=1.000e-06 w=7.250e-06 $pos=3 $flip=1
+Mdd0n d0 d net52 vss NMOS l=1.000e-06 w=3.000e-06 $pos=4 $flip=1
+Mdd0p d0 d net85 vdd PMOS l=1.000e-06 w=7.250e-06 $pos=4 $flip=1
+MI47 d0 incp net59 vss NMOS l=1.000e-06 w=2.000e-06 $pos=5 $flip=0
+MI45 d0 incpb net98 vdd PMOS l=1.000e-06 w=3.000e-06 $pos=5 $flip=0
+MI48 net59 d1 net62 vss NMOS l=1.000e-06 w=2.000e-06 $pos=6 $flip=0
+MI43 net98 d1 vdd vdd PMOS l=1.000e-06 w=2.750e-06 $pos=6 $flip=0
+Mcdn0n net62 cdn vss vss NMOS l=1.000e-06 w=2.000e-06 $pos=7 $flip=0
+Md0d1n d1 d0 vss vss NMOS l=1.000e-06 w=3.750e-06 $pos=8 $flip=1
+Mcdn0p net98 cdn vdd vdd PMOS l=1.000e-06 w=2.500e-06 $pos=8 $flip=0
+Mswd1d2n d1 incp d2 vss NMOS l=1.000e-06 w=4.250e-06 $pos=9 $flip=0
+Mdod1p d1 d0 vdd vdd PMOS l=1.000e-06 w=6.500e-06 $pos=9 $flip=1
+MI23 d2 incpb net57 vss NMOS l=1.000e-06 w=2.000e-06 $pos=10 $flip=0
+Mswd1d2p d1 incpb d2 vdd PMOS l=1.000e-06 w=9.250e-06 $pos=10 $flip=0
+MI26 d2 incp net88 vdd PMOS l=1.000e-06 w=2.500e-06 $pos=11 $flip=0
+MI24 net57 d3 vss vss NMOS l=1.000e-06 w=2.000e-06 $pos=12 $flip=0
+MI28 net88 d3 vdd vdd PMOS l=1.000e-06 w=2.500e-06 $pos=12 $flip=0
+Mcdn1n net37 cdn vss vss NMOS l=1.000e-06 w=6.000e-06 $pos=13 $flip=1
+Mcdn1p d3 cdn vdd vdd PMOS l=1.000e-06 w=9.000e-06 $pos=13 $flip=1
+Md2d3n d3 d2 net37 vss NMOS l=1.000e-06 w=6.000e-06 $pos=14 $flip=1
+Md2d3p d3 d2 vdd vdd PMOS l=1.000e-06 w=9.000e-06 $pos=14 $flip=0
+Mobp q d3 vdd vdd PMOS l=1.000e-06 w=1.000e-05 $pos=15 $flip=1
+Mobn q d3 vss vss NMOS l=1.000e-06 w=6.000e-06 $pos=16 $flip=1
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.DFQD1
+** Cell name: DFQD1
+** Lib name: openrule1um
+.SUBCKT DFQD1 cp d q vdd vss
+*.PININFO cp:I d:I q:O vdd:B vss:B 
+MI4 net43 incpb vss vss NMOS l=1.000e-06 w=3.500e-06
+MI23 d2 incpb net42 vss NMOS l=1.000e-06 w=2.000e-06
+MI5 d0 d net43 vss NMOS l=1.000e-06 w=3.500e-06
+MI47 d0 incp net50 vss NMOS l=1.000e-06 w=2.000e-06
+MI48 net50 d1 vss vss NMOS l=1.000e-06 w=2.000e-06
+MI24 net42 d3 vss vss NMOS l=1.000e-06 w=2.000e-06
+MI50 d1 incp d2 vss NMOS l=1.000e-06 w=3.250e-06
+MI32_M_u2 incp incpb vss vss NMOS l=1.000e-06 w=6.000e-06
+MI31_M_u2 incpb cp vss vss NMOS l=1.000e-06 w=6.000e-06
+MI27_M_u2 q d3 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI53_M_u2 d3 d2 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI13_M_u2 d1 d0 vss vss NMOS l=1.000e-06 w=4.000e-06
+MI6 d0 d net66 vdd PMOS l=1.000e-06 w=6.250e-06
+MI32_M_u3 incp incpb vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI31_M_u3 incpb cp vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI27_M_u3 q d3 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI53_M_u3 d3 d2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI13_M_u3 d1 d0 vdd vdd PMOS l=1.000e-06 w=6.250e-06
+MI7 net66 incp vdd vdd PMOS l=1.000e-06 w=7.250e-06
+MI52 d1 incpb d2 vdd PMOS l=1.000e-06 w=8.750e-06
+MI28 net74 d3 vdd vdd PMOS l=1.000e-06 w=2.500e-06
+MI26 d2 incp net74 vdd PMOS l=1.000e-06 w=2.500e-06
+MI45 d0 incpb net84 vdd PMOS l=1.000e-06 w=2.500e-06
+MI43 net84 d1 vdd vdd PMOS l=1.000e-06 w=2.500e-06
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.FILL1
+** Cell name: FILL1
+** Lib name: openrule1um
+.SUBCKT FILL1 vdd vss
+*.PININFO vdd:B vss:B 
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.FILL2
+** Cell name: FILL2
+** Lib name: openrule1um
+.SUBCKT FILL2 vdd vss
+*.PININFO vdd:B vss:B 
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.FILL4
+** Cell name: FILL4
+** Lib name: openrule1um
+.SUBCKT FILL4 vdd vss
+*.PININFO vdd:B vss:B 
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.FILL8
+** Cell name: FILL8
+** Lib name: openrule1um
+.SUBCKT FILL8 vdd vss
+*.PININFO vdd:B vss:B 
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.INVD1
+** Cell name: INVD1
+** Lib name: openrule1um
+.SUBCKT INVD1 i z vss vdd
+*.PININFO i:I z:O vss:B vdd:B
+M0 z i vss vss NMOS l=1.000e-06 w=6.000e-06
+M1 z i vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.MUX2D1
+** Cell name: MUX2D1
+** Lib name: openrule1um
+.SUBCKT MUX2D1 i0 i1 s vdd vss z
+*.PININFO i0:I i1:I s:I z:O vdd:B vss:B 
+MI15_M_u3 net46 s net28 vss NMOS l=1.000e-06 w=3.000e-06
+MU7_M_u3 net48 net42 net28 vss NMOS l=1.000e-06 w=3.000e-06
+MI20_M_u2 net46 i1 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI19_M_u2 net48 i0 vss vss NMOS l=1.000e-06 w=4.250e-06
+MI18_M_u2 net42 s vss vss NMOS l=1.000e-06 w=3.000e-06
+MU29_M_u2 z net28 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI15_M_u2 net46 net42 net28 vdd PMOS l=1.000e-06 w=5.000e-06
+MU7_M_u2 net48 s net28 vdd PMOS l=1.000e-06 w=5.000e-06
+MI20_M_u3 net46 i1 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI19_M_u3 net48 i0 vdd vdd PMOS l=1.000e-06 w=8.250e-06
+MI18_M_u3 net42 s vdd vdd PMOS l=1.000e-06 w=5.000e-06
+MU29_M_u3 z net28 vdd vdd PMOS l=1.000e-06 w=7.000e-06
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.ND2D1
+** Cell name: ND2D1
+** Lib name: openrule1um
+.SUBCKT ND2D1 a1 a2 vdd vss zn
+*.PININFO a1:I a2:I zn:O vdd:B vss:B 
+MI1_M_u3 zn a1 xi1_net6 vss NMOS l=1.000e-06 w=6.000e-06
+MI1_M_u4 xi1_net6 a2 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI1_M_u2 zn a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI1_M_u1 zn a1 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.ND3D1
+** Cell name: ND3D1
+** Lib name: openrule1um
+.SUBCKT ND3D1 a1 a2 a3 vdd vss zn
+*.PININFO a1:I a2:I a3:I zn:O vdd:B vss:B 
+MI1_M_u4 zn a1 xi1_net10 vss NMOS l=1.000e-06 w=6.000e-06
+MI1_M_u5 xi1_net10 a2 xi1_net13 vss NMOS l=1.000e-06 w=6.000e-06
+MI1_M_u6 xi1_net13 a3 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI1_M_u3 zn a3 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI1_M_u1 zn a1 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI1_M_u2 zn a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.ND4D1
+** Cell name: ND4D1
+** Lib name: openrule1um
+.SUBCKT ND4D1 a1 a2 a3 a4 vdd vss zn
+*.PININFO a1:I a2:I a3:I a4:I zn:O vdd:B vss:B 
+MI3 p0 a2 p1 vss NMOS l=1.000e-06 w=6.000e-06
+MI5 p2 a4 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI4 p1 a3 p2 vss NMOS l=1.000e-06 w=6.000e-06
+MU53 zn a1 p0 vss NMOS l=1.000e-06 w=6.000e-06
+MI7 zn a1 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI2 zn a4 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI1 zn a3 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI0 zn a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.NR2D1
+** Cell name: NR2D1
+** Lib name: openrule1um
+.SUBCKT NR2D1 a1 a2 vdd vss zn
+*.PININFO a1:I a2:I zn:O vdd:B vss:B 
+MI1_M_u4 zn a1 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI1_M_u3 zn a2 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI1_M_u2 zn a1 xi1_net8 vdd PMOS l=1.000e-06 w=1.000e-05
+MI1_M_u1 xi1_net8 a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.NR3D1
+** Cell name: NR3D1
+** Lib name: openrule1um
+.SUBCKT NR3D1 a1 a2 a3 vdd vss zn
+*.PININFO a1:I a2:I a3:I zn:O vdd:B vss:B 
+M_u4 zn a3 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI2 zn a2 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI3 zn a1 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI4_0 net37_0_ a2 net34_0_ vdd PMOS l=1.000e-06 w=1.000e-05
+M_u1_0 net34_0_ a3 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u1_1 net34_1_ a3 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI4_1 net37_1_ a2 net34_1_ vdd PMOS l=1.000e-06 w=1.000e-05
+MI5_0 zn a1 net37_0_ vdd PMOS l=1.000e-06 w=1.000e-05
+MI5_1 zn a1 net37_1_ vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.NR4D1
+** Cell name: NR4D1
+** Lib name: openrule1um
+.SUBCKT NR4D1 a1 a2 a3 a4 vdd vss zn
+*.PININFO a1:I a2:I a3:I a4:I zn:O vdd:B vss:B 
+MI36 zn a4 vss vss NMOS l=1.000e-06 w=4.000e-06
+MI35 zn a3 vss vss NMOS l=1.000e-06 w=4.000e-06
+MI34 zn a2 vss vss NMOS l=1.000e-06 w=4.000e-06
+MI5 zn a1 vss vss NMOS l=1.000e-06 w=4.000e-06
+MI26 net49 a3 net52 vdd PMOS l=1.000e-06 w=1.000e-05
+MI30 net43 a2 net40 vdd PMOS l=1.000e-06 w=1.000e-05
+MI31 net40 a3 net37 vdd PMOS l=1.000e-06 w=1.000e-05
+MI32 net37 a4 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI29 zn a1 net43 vdd PMOS l=1.000e-06 w=1.000e-05
+MI7 net52 a4 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI27 net46 a2 net49 vdd PMOS l=1.000e-06 w=1.000e-05
+MI28 zn a1 net46 vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.OA21D1
+** Cell name: OA21D1
+** Lib name: openrule1um
+.SUBCKT OA21D1 a1 a2 b vdd vss z
+*.PININFO a1:I a2:I b:I z:O vdd:B vss:B 
+MI12 net14 a2 net20 vss NMOS l=1.000e-06 w=6.000e-06
+MI11 net14 a1 net20 vss NMOS l=1.000e-06 w=6.000e-06
+MI6 net20 b vss vss NMOS l=1.000e-06 w=6.000e-06
+MI8_M_u2 z net14 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI9 net14 a1 net24 vdd PMOS l=1.000e-06 w=1.000e-05
+MI8_M_u3 z net14 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u2 net14 b vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI7 net24 a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.OAI21D1
+** Cell name: OAI21D1
+** Lib name: openrule1um
+.SUBCKT OAI21D1 a1 a2 b vdd vss zn
+*.PININFO a1:I a2:I b:I zn:O vdd:B vss:B 
+M_u2 zn a1 net15 vss NMOS l=1.000e-06 w=6.000e-06
+M_u3 zn a2 net15 vss NMOS l=1.000e-06 w=6.000e-06
+M_u4 net15 b vss vss NMOS l=1.000e-06 w=6.000e-06
+MI16_MI12 zn a1 xi16_net11 vdd PMOS l=1.000e-06 w=1.000e-05
+M_u9 zn b vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI16_MI13 xi16_net11 a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.OR2D1
+** Cell name: OR2D1
+** Lib name: openrule1um
+.SUBCKT OR2D1 a1 a2 vdd vss z
+*.PININFO a1:I a2:I z:O vdd:B vss:B 
+MU1_M_u2 z net7 vss vss NMOS l=1.000e-06 w=5.500e-06
+M_u7_M_u4 net7 a1 vss vss NMOS l=1.000e-06 w=5.500e-06
+M_u7_M_u3 net7 a2 vss vss NMOS l=1.000e-06 w=5.500e-06
+M_u7_M_u2 net7 a1 x_u7_net8 vdd PMOS l=1.000e-06 w=1.000e-05
+MU1_M_u3 z net7 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u7_M_u1 x_u7_net8 a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.TAPCELL
+** Cell name: TAPCELL
+** Lib name: openrule1um
+.SUBCKT TAPCELL vdd vss
+*.PININFO vdd:B vss:B 
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.TIEH
+** Cell name: TIEH
+** Lib name: openrule1um
+.SUBCKT TIEH vdd vss z
+*.PININFO z:O vdd:B vss:B 
+M_u2 net6 net6 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u1 z net6 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.TIEL
+** Cell name: TIEL
+** Lib name: openrule1um
+.SUBCKT TIEL vdd vss zn
+*.PININFO zn:O vdd:B vss:B 
+M_u2 zn net6 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u1 net6 net6 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.XNR2D1
+** Cell name: XNR2D1
+** Lib name: openrule1um
+.SUBCKT XNR2D1 a1 a2 vdd vss zn
+*.PININFO a1:I a2:I zn:O vdd:B vss:B 
+M_u2_M_u2 net4 a2 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u5_M_u2 net6 net4 vss vss NMOS l=1.000e-06 w=3.000e-06
+M_u4_M_u2 zn net14 vss vss NMOS l=1.000e-06 w=6.000e-06
+M_u8_M_u2 net10 a1 vss vss NMOS l=1.000e-06 w=3.000e-06
+M_u6_M_u3 net4 a1 net14 vss NMOS l=1.000e-06 w=3.000e-06
+M_u7_M_u3 net6 net10 net14 vss NMOS l=1.000e-06 w=3.000e-06
+M_u6_M_u2 net4 net10 net14 vdd PMOS l=1.000e-06 w=5.000e-06
+M_u2_M_u3 net4 a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u5_M_u3 net6 net4 vdd vdd PMOS l=1.000e-06 w=5.000e-06
+M_u4_M_u3 zn net14 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+M_u8_M_u3 net10 a1 vdd vdd PMOS l=1.000e-06 w=5.000e-06
+M_u7_M_u2 net6 a1 net14 vdd PMOS l=1.000e-06 w=5.000e-06
+.ENDS
+
+
+******* EOF
+
+** Created by: circuit_gen.XOR2D1
+** Cell name: XOR2D1
+** Lib name: openrule1um
+.SUBCKT XOR2D1 a1 a2 vdd vss z
+*.PININFO a1:I a2:I z:O vdd:B vss:B 
+MI6_M_u3 net41 a1 net21 vss NMOS l=1.000e-06 w=3.000e-06
+MI2_M_u3 net27 net23 net21 vss NMOS l=1.000e-06 w=3.000e-06
+MI7_M_u2 net41 net27 vss vss NMOS l=1.000e-06 w=3.000e-06
+MI3_M_u2 net27 a2 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI4_M_u2 z net21 vss vss NMOS l=1.000e-06 w=6.000e-06
+MI5_M_u2 net23 a1 vss vss NMOS l=1.000e-06 w=3.000e-06
+MI6_M_u2 net41 net23 net21 vdd PMOS l=1.000e-06 w=5.000e-06
+MI2_M_u2 net27 a1 net21 vdd PMOS l=1.000e-06 w=5.000e-06
+MI7_M_u3 net41 net27 vdd vdd PMOS l=1.000e-06 w=5.000e-06
+MI3_M_u3 net27 a2 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI4_M_u3 z net21 vdd vdd PMOS l=1.000e-06 w=1.000e-05
+MI5_M_u3 net23 a1 vdd vdd PMOS l=1.000e-06 w=5.000e-06
+.ENDS
+
+
+******* EOF
+
