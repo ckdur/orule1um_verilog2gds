@@ -69,7 +69,7 @@ set DIODECells [list ]
 ####################################
 set row   5.0
 set track 2.0
-set pitch [expr 16*$row]
+set pitch [expr 38*$row]
 set margin [expr 3*$row]
 
 if {[file exists $env(PNR_DIR)/$env(TOP).openlane.fp.tcl]} {
@@ -123,14 +123,15 @@ close $fo
 
 # TODO: Ohh my... IS NOT POSSIBLE to get the tracks from tech lef file
 #make_tracks {layer} -x_offset {x_offset} -x_pitch {x_pitch} -y_offset {y_offset} -y_pitch {y_pitch}
-make_tracks ML1 -x_offset 0.25 -x_pitch 2.0 -y_offset 0.25 -y_pitch 2.0
-make_tracks ML2 -x_offset 0.25 -x_pitch 2.0 -y_offset 0.25 -y_pitch 2.0
-make_tracks ML3 -x_offset 0.25 -x_pitch 2.0 -y_offset 0.25 -y_pitch 2.0
+make_tracks ML1 -x_offset 0.5 -x_pitch 2.0 -y_offset 0.5 -y_pitch 2.0
+make_tracks ML2 -x_offset 0.5 -x_pitch 2.0 -y_offset 0.5 -y_pitch 2.0
+make_tracks ML3 -x_offset 0.5 -x_pitch 2.0 -y_offset 0.5 -y_pitch 2.0
 
 ####################################
 ## Tapcell insertion
 ####################################
 
+tapcell
 #tapcell\
 #    -distance 150 \
 #    -tapcell_master "$TAPCells"

@@ -15,7 +15,7 @@ NET=$(PNR_DIR)/outputs/$(TOP)_pg.v
 export NET
 LEF=$(LIB_DIR)/$(TECH).lef
 export LEF
-TLEF=$(LIB_DIR)/$(TECH).tlef
+TLEF=$(LIB_DIR)/$(TECH).defin.tlef
 export TLEF
 TGDS=$(LIB_DIR)/$(TECH).gds
 export TGDS

@@ -8,7 +8,7 @@ module counter(
   always @(posedge clk or posedge rst) begin
     if(rst) begin
       bits <= 0;
-    end else begin
+    end else if(enable) begin
       bits <= bits + 1;
     end
   end
