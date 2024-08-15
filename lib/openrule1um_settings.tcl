@@ -15,4 +15,5 @@ if { [info exists ::env(PDK_ROOT)]} {
   # Setting a default
   set PDK_ROOT "$::env(HOME)/.klayout"
 }
+# TODO: No RC rules
 set RCX_RULES "$PDK_ROOT/openrule1umA/libs.tech/openlane/rules.openrcx.openrule1umA.nom.calibre"

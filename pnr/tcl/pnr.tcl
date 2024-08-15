@@ -67,10 +67,9 @@ set DIODECells [list ]
 ####################################
 ## Floor Plan
 ####################################
-# TODO: Is there a way to extract from a command?
-set row   40.0
+set row   5.0
 set track 2.0
-set pitch [expr 4*$row]
+set pitch [expr 16*$row]
 set margin [expr 3*$row]
 
 if {[file exists $env(PNR_DIR)/$env(TOP).openlane.fp.tcl]} {
@@ -80,8 +79,8 @@ if {[file exists $env(PNR_DIR)/$env(TOP).openlane.fp.tcl]} {
   initialize_floorplan -site obscore -aspect_ratio [expr $PX/$PY] -utilization [expr $PR*100] -core_space "$margin $margin $margin $margin"
 }
 
-add_global_connection -net VDD -inst_pattern .* -pin_pattern VDD -power
-add_global_connection -net VSS -inst_pattern .* -pin_pattern VSS -power
+add_global_connection -net VDD -inst_pattern .* -pin_pattern vdd -power
+add_global_connection -net VSS -inst_pattern .* -pin_pattern vss -power
 set_voltage_domain -name CORE -power VDD -ground VSS
 
 insert_tiecells "TIEL/zn" -prefix "TIE_ZERO_"
@@ -132,10 +131,12 @@ make_tracks ML3 -x_offset 0.25 -x_pitch 2.0 -y_offset 0.25 -y_pitch 2.0
 ## Tapcell insertion
 ####################################
 
-tapcell\
-    -distance 100 \
-    -tapcell_master "$TAPCells"
+#tapcell\
+#    -distance 150 \
+#    -tapcell_master "$TAPCells"
 
+add_global_connection -net VDD -inst_pattern .* -pin_pattern vdd -power
+add_global_connection -net VSS -inst_pattern .* -pin_pattern vss -power
 
 ####################################
 ## Power planning & SRAMs placement
@@ -150,7 +151,7 @@ define_pdn_grid \
 add_pdn_stripe \
     -grid stdcell_grid \
     -layer ML2 \
-    -width 2.0 \
+    -width 4.0 \
     -pitch $pitch \
     -offset $pitch \
     -spacing 1.0 \
@@ -159,7 +160,7 @@ add_pdn_stripe \
 add_pdn_stripe \
     -grid stdcell_grid \
     -layer ML3 \
-    -width 2.0 \
+    -width 4.0 \
     -pitch $pitch \
     -offset $pitch \
     -spacing 1.0 \
@@ -178,14 +179,14 @@ add_pdn_stripe \
 
 add_pdn_connect \
     -grid stdcell_grid \
-        -layers "ML1 ML3"
+        -layers "ML1 ML2"
 
 add_pdn_ring \
         -grid stdcell_grid \
         -layers "ML2 ML3" \
-        -widths "2.0 2.0" \
+        -widths "4.0 4.0" \
         -spacings "1.0 1.0" \
-        -core_offset "$row $row"
+        -core_offset "3.0 3.0"
 
 #define_pdn_grid \
 #    -macro \
@@ -199,7 +200,6 @@ add_pdn_ring \
 #    -layers "$::env(FP_PDN_VERTICAL_LAYER) $::env(FP_PDN_HORIZONTAL_LAYER)"
 
 pdngen
-catch
 
 ###################################
 ## Placement
@@ -207,8 +207,8 @@ catch
 
 place_pins -random \
 	-random_seed 42 \
-	-hor_layers met3 \
-	-ver_layers met2
+	-hor_layers ML3 \
+	-ver_layers ML2
 
 # -density 1.0 -overflow 0.9 -init_density_penalty 0.0001 -initial_place_max_iter 20 -bin_grid_count 64
 global_placement -density 0.85
@@ -235,18 +235,12 @@ if { [catch {check_placement -verbose} errmsg] } {
 ####################################
 # CTS
 ####################################
-set_routing_layers -signal [subst "met1"]-[subst "met5"] -clock [subst "met3"]-[subst "met5"]
+set_routing_layers -signal [subst "ML1"]-[subst "ML3"] -clock [subst "ML2"]-[subst "ML3"]
 
-set_global_routing_layer_adjustment * 0.3
-set_global_routing_layer_adjustment li1 0.99
-set_global_routing_layer_adjustment met1 0
-set_global_routing_layer_adjustment met2 0
-set_global_routing_layer_adjustment met3 0
-set_global_routing_layer_adjustment met4 0
-set_global_routing_layer_adjustment met5 0
+set_global_routing_layer_adjustment * 0
 
-set_wire_rc -signal -layer "met2"
-set_wire_rc -clock -layer "met5"
+set_wire_rc -signal -layer "ML2"
+set_wire_rc -clock -layer "ML2"
 
 estimate_parasitics -placement
 repair_clock_inverters
@@ -288,8 +282,8 @@ filler_placement "$FILLERCells"
 ###############################################
 set_thread_count 2
 detailed_route\
-    -bottom_routing_layer "met1" \
-    -top_routing_layer "met5" \
+    -bottom_routing_layer "ML1" \
+    -top_routing_layer "ML3" \
     -output_maze $PNR_DIR/reports/${TOP}_maze.log\
     -output_drc $PNR_DIR/reports/${TOP}.drc\
     -droute_end_iter 64 \
@@ -300,14 +294,15 @@ detailed_route\
 ## Write out final files
 #################################################
 define_process_corner -ext_model_index 0 X
-extract_parasitics -ext_model_file $RCX_RULES -lef_res
+# TODO: No RC rules
+# extract_parasitics -ext_model_file $RCX_RULES -lef_res
 
 write_db DesignLib
 
 write_verilog $PNR_DIR/outputs/${TOP}.v
 write_verilog -include_pwr_gnd $PNR_DIR/outputs/${TOP}_pg.v
 write_def $PNR_DIR/outputs/${TOP}.def
-write_spef $PNR_DIR/outputs/${TOP}.spef
+#write_spef $PNR_DIR/outputs/${TOP}.spef
 write_abstract_lef $PNR_DIR/outputs/${TOP}.lef
 # write_timing_model $PNR_DIR/outputs/${TOP}.lib
 
